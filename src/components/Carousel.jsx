@@ -34,17 +34,16 @@ const Carousel = (props) => {
   }, [activeBanner]);
 
   return (
-    <View style={{ alignItems: 'center', height: 200}} >
+    <View style={{ alignItems: 'center', height: 183, display: 'flex', marginTop: 167 }}>
       <FlatList
         ref={FlatlistRef}
         data={props.images}
-        renderItem={({ item, index }) => (
+        renderItem={({ item }) => (
           <View
             style={{
-              width: Dimensions.get('screen').width * 0.8,
-              alignItems: 'center',
-              borderRadius: 30,
-              marginHorizontal: 40,
+              justifyContent: 'center', // Center image vertically
+              paddingHorizontal: 25, // Add horizontal spacing
+              backgroundColor: '#ffffff00',
             }}
           >
             <Image
@@ -52,12 +51,12 @@ const Carousel = (props) => {
                 uri: item.image,
               }}
               style={{
-                width: '100%',
+                width: Dimensions.get('window').width - 50,
                 height: '100%',
                 alignSelf: 'center',
-                borderRadius: 20,
+                borderRadius: 18,
               }}
-              resizeMode='contain'
+              resizeMode='cover'
             />
           </View>
         )}
@@ -69,17 +68,17 @@ const Carousel = (props) => {
       />
       <FlatList
         data={props.images}
-        renderItem={({ item, index }) => (
+        renderItem={({ index }) => (
           <Animated.View
             layout={Layout}
             entering={FadeInLeft}
             exiting={FadeOutRight}
             style={{
-              width: activeBanner === index ? 20 : 8,
-              height: 8,
+              width: activeBanner === index ? 24 : 9,
+              height: 9,
               borderRadius: 4,
-              backgroundColor: activeBanner === index ? 'black' : 'gray',
-              marginHorizontal: 2,
+              backgroundColor: activeBanner === index ? '#ff0078' : '#ff00787c',
+              marginHorizontal: 5, // Adjust spacing
               marginTop: 10,
               marginBottom: 3
             }}
