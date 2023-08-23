@@ -1,13 +1,3 @@
-// import { Slot } from "expo-router";
-
-// import "../../../global.css";
-
-// export default function () {
-//   return <Slot />;
-// }
-
-// backgroundColor: '#ffffff00',
-
 import { Tabs } from "expo-router";
 import {
   useFonts,
@@ -16,7 +6,7 @@ import {
   Poppins_500Medium,
   Poppins_700Bold,
 } from "@expo-google-fonts/poppins";
-import { Text, View, ImageBackground, Dimensions } from 'react-native';
+import { Text, View } from 'react-native';
 import { Entypo, Octicons, FontAwesome } from '@expo/vector-icons';
 
 
@@ -48,7 +38,7 @@ export default function TabRoutesLayout() {
         backgroundColor: '#181c42',
         borderStyle: "solid",
         borderWidth: 2,
-        paddingTop: 14,
+        paddingTop: 17,
         borderColor: "#181c42"
       },
     }}>
@@ -57,9 +47,17 @@ export default function TabRoutesLayout() {
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ focused }) => (
-            <View style={{ paddingVertical: 8, paddingHorizontal: 12, borderRadius: 12, backgroundColor: focused ? "#252b56" : "#181c42"}}>
-              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 5 }}>
-                <Entypo name="home" size={22} color={`${focused ? "#ff0078" : "#555b87"}`} />
+            <View
+              style={{
+                paddingHorizontal: 16,
+                paddingVertical: 8,
+                borderRadius: 12,
+                backgroundColor: focused ? "#252b56" : "#181c42"
+              }}
+            >
+              <View  style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 6 }}>
+                <Entypo name="home" size={20} color={`${focused ? "#ff0078" : "#555b87"}`} />
+                {focused && <Text style={{ color: "#ff0078", fontFamily: "Poppins_500Medium", paddingTop: 3 }}>Home</Text>}
               </View>
             </View>
           ),
@@ -70,9 +68,17 @@ export default function TabRoutesLayout() {
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ focused }) => (
-            <View style={{ paddingVertical: 8, paddingHorizontal: 12, borderRadius: 12, backgroundColor: focused ? "#252b56" : "#181c42"}}>
-              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 5 }}>
-                <Octicons name="search" size={22} color={`${focused ? "#ff0078" : "#555b87"}`} />
+            <View
+              style={{
+                paddingHorizontal: 16,
+                paddingVertical: 8,
+                borderRadius: 12,
+                backgroundColor: focused ? "#252b56" : "#181c42"
+              }}
+            >
+              <View  style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 6 }}>
+                <Octicons name="search" size={20} color={`${focused ? "#ff0078" : "#555b87"}`} />
+                {focused && <Text style={{ color: "#ff0078", fontFamily: "Poppins_500Medium", paddingTop: 3 }}>Pesquisa</Text>}
               </View>
             </View>
           ),
@@ -83,9 +89,17 @@ export default function TabRoutesLayout() {
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ focused }) => (
-            <View style={{ paddingVertical: 8, paddingHorizontal: 12, borderRadius: 12, backgroundColor: focused ? "#252b56" : "#181c42"}}>
-              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 5 }}>
-                <FontAwesome name="user" size={22} color={`${focused ? "#ff0078" : "#555b87"}`} />
+            <View
+              style={{
+                paddingHorizontal: 16,
+                paddingVertical: 8,
+                borderRadius: 12,
+                backgroundColor: focused ? "#252b56" : "#181c42"
+              }}
+            >
+              <View  style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 6 }}>
+                <FontAwesome name="user" size={20} color={`${focused ? "#ff0078" : "#555b87"}`} />
+                {focused && <Text style={{ color: "#ff0078", fontFamily: "Poppins_500Medium", paddingTop: 3 }}>Perfil</Text>}
               </View>
             </View>
           ),

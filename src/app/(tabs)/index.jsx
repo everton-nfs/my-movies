@@ -35,7 +35,6 @@ export default function Home() {
       image:
         'https://www.themoviedb.org/t/p/original/5YZbUmjbMa3ClvSW1Wj3D6XGolb.jpg'
     }
-    // Add more images as needed
   ];
 
   return (
