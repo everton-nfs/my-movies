@@ -9,13 +9,19 @@ module.exports = {
     extend: {},
     colors: {
       'pink': {
-        75: "#ff00787c",
+        50: "#ff00787c",
+        75: "#880f5d",
         100: "#ff0078"
       },
       'blue': {
         50: "#555b87",
         75: "#252b56",
         100: "#181c42"
+      },
+      'white': "#ffffff",
+      'black': {
+        75: "#0000004a",
+        100: "#000000"
       },
       'transparent': "#ffffff00"
     }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, FlatList, Image, Dimensions } from 'react-native';
+import { View, FlatList, ImageBackground, Dimensions, Text } from 'react-native';
 import Animated, { Layout, FadeInLeft, FadeOutRight } from 'react-native-reanimated';
 
 const Carousel = (props) => {
@@ -34,30 +34,47 @@ const Carousel = (props) => {
   }, [activeBanner]);
 
   return (
-    <View style={{ alignItems: 'center', height: 183, display: 'flex', marginTop: 167 }}>
+    <View style={{ alignItems: 'center', height: 190, display: 'flex' }}>
       <FlatList
         ref={FlatlistRef}
         data={props.images}
         renderItem={({ item }) => (
+
           <View
             style={{
-              justifyContent: 'center', // Center image vertically
-              paddingHorizontal: 25, // Add horizontal spacing
-              backgroundColor: '#ffffff00',
+              justifyContent: "center",
+              paddingHorizontal: 25,
             }}
           >
-            <Image
+            <ImageBackground
               source={{
                 uri: item.image,
               }}
               style={{
-                width: Dimensions.get('window').width - 50,
-                height: '100%',
-                alignSelf: 'center',
+                width: Dimensions.get("window").width - 50,
+                height: "100%",
+                alignSelf: "center",
                 borderRadius: 18,
+                overflow: "hidden",
+                position: "relative",
               }}
-              resizeMode='cover'
-            />
+              resizeMode="cover"
+            >
+              <View className="flex-1 justify-end h-full px-4 pb-3 bg-black-75 w-full">
+                <Text
+                  className="text-lg leading-[22px] text-white"
+                  style={{ fontFamily: "Poppins_600SemiBold" }}
+                >
+                  {item.title}
+                </Text>
+                <Text
+                  className="text-white"
+                  style={{ fontFamily: "Poppins_600SemiBold" }}
+                >
+                  {item.launchDate}
+                </Text>
+              </View>
+            </ImageBackground>
           </View>
         )}
         pagingEnabled
@@ -77,10 +94,10 @@ const Carousel = (props) => {
               width: activeBanner === index ? 24 : 9,
               height: 9,
               borderRadius: 4,
-              backgroundColor: activeBanner === index ? '#ff0078' : '#ff00787c',
+              backgroundColor: activeBanner === index ? '#ff0078' : '#880f5d',
               marginHorizontal: 5, // Adjust spacing
-              marginTop: 10,
-              marginBottom: 3
+              marginTop: 14,
+              marginBottom: 4
             }}
           />
         )}
