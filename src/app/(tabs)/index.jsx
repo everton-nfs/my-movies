@@ -1,4 +1,4 @@
-import { Text, View, ImageBackground, Dimensions, Image } from "react-native";
+import { Text, View, ImageBackground, SafeAreaView, Dimensions, Image, ScrollView } from "react-native";
 import Carousel from "../../components/Carousel";
 import {
   useFonts,
@@ -22,7 +22,7 @@ export default function Home() {
     return null;
   }
 
-  const images = [
+  const featuredMovies = [
     {
       id: 1,
       image:
@@ -40,15 +40,53 @@ export default function Home() {
     {
       id: 3,
       image:
-      "https://www.themoviedb.org/t/p/original/kVd3a9YeLGkoeR50jGEXM6EqseS.jpg",
-    title: "Homem-Aranha: Através do Aranhaverso",
-    launchDate: "06/01/2023"
+        "https://www.themoviedb.org/t/p/original/kVd3a9YeLGkoeR50jGEXM6EqseS.jpg",
+      title: "Homem-Aranha: Através do Aranhaverso",
+      launchDate: "06/01/2023"
+    },
+  ];
+
+  const popularFilms = [
+    {
+      id: 1,
+      image:
+        "https://www.themoviedb.org/t/p/original/6oH378KUfCEitzJkm07r97L0RsZ.jpg",
+      title: "Elementos",
+      gender: "Animação"
+    },
+    {
+      id: 2,
+      image:
+        "https://www.themoviedb.org/t/p/original/gPbM0MK8CP8A174rmUwGsADNYKD.jpg",
+      title: "Transformers: O Despertar das Feras",
+      gender: "Ação"
+    },
+    {
+      id: 3,
+      image:
+        "https://www.themoviedb.org/t/p/original/vB8o2p4ETnrfiWEgVxHmHWP9yRl.jpg",
+      title: "Agente Stone",
+      gender: "Mistério"
+    },
+    {
+      id: 4,
+      image:
+        "https://www.themoviedb.org/t/p/original/rktDFPbfHfUbArZ6OOOKsXcv0Bm.jpg",
+      title: "The Flash",
+      gender: "Ação"
+    },
+    {
+      id: 5,
+      image:
+        "https://www.themoviedb.org/t/p/original/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg",
+      title: "Barbie",
+      gender: "Comédia"
     },
   ];
 
   return (
     <ImageBackground
-      className="bg-blue-100"
+      className="bg-blue-100 flex-1"
       //source={require("../../assets/home-model.png")}
       style={{ width: "100%", height: Dimensions.get("screen").height }}
       resizeMode="cover"
@@ -79,7 +117,7 @@ export default function Home() {
         </View>
       </View>
 
-      <View className="flex-row items-center mx-[25] rounded-full px-[17px] h-11 bg-blue-75 mb-6">
+      <View className="flex-row items-center mx-[25px] rounded-full px-[17px] h-11 bg-blue-75 mb-6">
         <Octicons className="mx-4" name="search" size={17} color="#555b87" />
         <TextInput
           className="flex-1 px-3 items-center pt-[2px]"
@@ -91,7 +129,67 @@ export default function Home() {
         />
       </View>
 
-      <Carousel images={images} />
+      <ScrollView
+        className="mb-[20%]"
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
+        <Carousel images={featuredMovies} />
+
+        <ScrollView
+          className="mt-[168px] pb-6"
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ paddingHorizontal: 25 }}
+        >
+          {popularFilms.map((item, index) => (
+            <View
+              key={index}
+              style={{
+                width: 145,
+                height: 250,
+                flex: 1,
+                marginHorizontal: 6,
+                borderRadius: 10,
+                marginLeft: index === 0 ? 0 : 6,
+                marginRight: index === popularFilms.length - 1 ? 0 : 6,
+                overflow: "hidden",
+                backgroundColor: "#252b56"
+              }}
+            >
+              <Image
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  flex: 1,
+                }}
+                source={{
+                  uri: item.image,
+                }}
+              />
+              <View className="px-[10px] pb-3">
+                <Text
+                  className="text-[14.8px] leading-[10px] pt-5 text-white"
+                  style={{ fontFamily: "Poppins_600SemiBold" }}
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                >
+                  {item.title}
+                </Text>
+                <Text
+                  className="text-blue-50 text-xs"
+                  style={{ fontFamily: "Poppins_500Medium" }}
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                >
+                  {item.gender}
+                </Text>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+      </ScrollView>
+
+
 
     </ImageBackground>
   );

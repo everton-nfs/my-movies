@@ -29,7 +29,7 @@ export default function TabRoutesLayout() {
       tabBarStyle: {
         position: 'absolute',
         elevation: 0,
-        display: "flex",
+        display: "flex", //"flex"
         justifyContent: "center",
         alignItems: "center",
         height: 80,
