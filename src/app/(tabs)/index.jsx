@@ -1,4 +1,5 @@
-import { Text, View, ImageBackground, SafeAreaView, Dimensions, Image, ScrollView } from "react-native";
+import { Text, View, ImageBackground, SafeAreaView, TouchableHighlight, Dimensions, Image, ScrollView } from "react-native";
+import React, { useState } from 'react';
 import Carousel from "../../components/Carousel";
 import {
   useFonts,
@@ -11,6 +12,9 @@ import { Octicons } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 
 export default function Home() {
+
+  const [selectedGender, setSelectedGender] = useState(1);
+
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_600SemiBold,
@@ -84,7 +88,28 @@ export default function Home() {
     },
   ];
 
+  const moviesCategories = [
+    {
+      id: 1,
+      title: "Todos"
+    },
+    {
+      id: 2,
+      title: "Comédia"
+    },
+    {
+      id: 3,
+      title: "Animação"
+    },
+    {
+      id: 4,
+      title: "Documentário"
+    }
+  ]
+
   return (
+
+
     <ImageBackground
       className="bg-blue-100 flex-1"
       //source={require("../../assets/home-model.png")}
@@ -135,58 +160,117 @@ export default function Home() {
       >
         <Carousel images={featuredMovies} />
 
-        <ScrollView
-          className="mt-[168px] pb-6"
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingHorizontal: 25 }}
-        >
-          {popularFilms.map((item, index) => (
-            <View
-              key={index}
-              style={{
-                width: 145,
-                height: 250,
-                flex: 1,
-                marginHorizontal: 6,
-                borderRadius: 10,
-                marginLeft: index === 0 ? 0 : 6,
-                marginRight: index === popularFilms.length - 1 ? 0 : 6,
-                overflow: "hidden",
-                backgroundColor: "#252b56"
-              }}
-            >
-              <Image
+        <View className="mt-5">
+          <Text
+            className="text-lg text-white mx-[25px]"
+            style={{ fontFamily: "Poppins_600SemiBold" }}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            Categorias
+          </Text>
+
+          <ScrollView
+            className="mt-[18px]"
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: 25 }}
+          >
+            {moviesCategories.map((item, index) => (
+              <TouchableHighlight
+                key={item.id}
+                underlayColor="#252b56"
+                onPress={() => setSelectedGender(item.id)}
                 style={{
-                  width: "100%",
-                  height: "100%",
-                  flex: 1,
+                  minWidth: 85,
+                  height: 32,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginHorizontal: 6,
+                  borderRadius: 8,
+                  marginLeft: index === 0 ? 0 : 6,
+                  marginRight: index === moviesCategories.length - 1 ? 0 : 6,
+                  overflow: "hidden",
+                  backgroundColor: selectedGender === item.id ? '#252b56' : '#181c42'
                 }}
-                source={{
-                  uri: item.image,
-                }}
-              />
-              <View className="px-[10px] pb-3">
+              >
                 <Text
-                  className="text-[14.8px] leading-[10px] pt-5 text-white"
-                  style={{ fontFamily: "Poppins_600SemiBold" }}
-                  numberOfLines={1}
-                  ellipsizeMode="tail"
-                >
-                  {item.title}
-                </Text>
-                <Text
-                  className="text-blue-50 text-xs"
+                  className={`py-[6px] px-[12px] ${selectedGender === item.id ? 'text-pink-100' : 'text-white'}`}
                   style={{ fontFamily: "Poppins_500Medium" }}
                   numberOfLines={1}
                   ellipsizeMode="tail"
-                >
-                  {item.gender}
-                </Text>
+                >{item.title}</Text>
+              </TouchableHighlight>
+            ))}
+          </ScrollView>
+        </View>
+
+        <View className="mt-[29px]">
+          <Text
+            className="text-lg text-white mx-[25px]"
+            style={{ fontFamily: "Poppins_600SemiBold" }}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            Mais popular
+          </Text>
+          <ScrollView
+            className="pb-6 pt-4"
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingHorizontal: 25 }}
+          >
+            {popularFilms.map((item, index) => (
+              <View
+                key={index}
+                style={{
+                  width: 145,
+                  height: 250,
+                  flex: 1,
+                  marginHorizontal: 6,
+                  borderRadius: 10,
+                  marginLeft: index === 0 ? 0 : 6,
+                  marginRight: index === popularFilms.length - 1 ? 0 : 6,
+                  overflow: "hidden",
+                  backgroundColor: "#252b56"
+                }}
+              >
+                <Image
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    flex: 1,
+                  }}
+                  source={{
+                    uri: item.image,
+                  }}
+                />
+                <View className="px-[10px] pb-3">
+                  <Text
+                    className="text-[14.8px] leading-[10px] pt-5 text-white"
+                    style={{ fontFamily: "Poppins_600SemiBold" }}
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                  >
+                    {item.title}
+                  </Text>
+                  <Text
+                    className="text-blue-50 text-xs"
+                    style={{ fontFamily: "Poppins_500Medium" }}
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                  >
+                    {item.gender}
+                  </Text>
+                </View>
               </View>
-            </View>
-          ))}
-        </ScrollView>
+            ))}
+          </ScrollView>
+        </View>
+
+
+
       </ScrollView>
 
 
