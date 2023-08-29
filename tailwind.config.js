@@ -20,8 +20,12 @@ module.exports = {
       },
       'white': "#ffffff",
       'black': {
+        50: "#00000090",
         75: "#0000004a",
         100: "#000000"
+      },
+      'yellow': {
+        100: "#ebbf2a",
       },
       'transparent': "#ffffff00"
     }
