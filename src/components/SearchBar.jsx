@@ -1,6 +1,7 @@
-import { View,TextInput } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text } from 'react-native';
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_500Medium, Poppins_700Bold } from '@expo-google-fonts/poppins';
 import { Octicons } from "@expo/vector-icons";
+import { Link } from "expo-router";
 
 export default function SearchBar() {
   const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_600SemiBold, Poppins_500Medium, Poppins_700Bold });
@@ -10,16 +11,33 @@ export default function SearchBar() {
   }
 
   return (
-    <View className="flex-row items-center mx-[25px] rounded-full px-[17px] h-11 bg-blue-75 mb-6">
-      <Octicons className="mx-4" name="search" size={17} color="#555b87" />
-      <TextInput
-        className="flex-1 px-3 items-center pt-[2px]"
-        color="#ffffff"
-        cursorColor="#555b87"
-        placeholderTextColor="#555b87"
-        placeholder="Pesquise pelo título..."
-        style={{ fontFamily: "Poppins_500Medium" }}
-      />
-    </View>
+    <>
+      {/* <View className="flex-row items-center mx-[25px] rounded-full px-[17px] h-11 bg-blue-75 mb-6">
+        <Octicons className="mx-4" name="search" size={17} color="#555b87" />
+        <TextInput
+          className="flex-1 px-3 items-center pt-[2px]"
+          color="#ffffff"
+          cursorColor="#555b87"
+          placeholderTextColor="#555b87"
+          placeholder="Pesquise pelo título..."
+          style={{ fontFamily: "Poppins_500Medium" }}
+          editable={true}
+        />
+      </View> */}
+
+      <Link href="/search" asChild>
+        <TouchableOpacity className="flex-row items-center mx-[25px] rounded-full px-[17px] h-11 bg-blue-75 mb-6">
+          <Octicons className="mx-4" name="search" size={17} color="#555b87" />
+          <Text
+            className="flex-1 px-3 items-center pt-[2px] text-blue-50"
+            style={{ fontFamily: "Poppins_500Medium" }}
+          >Pesquise pelo título...</Text>
+        </TouchableOpacity>
+      </Link> 
+
+      
+
+    </>
+
   )
 }
