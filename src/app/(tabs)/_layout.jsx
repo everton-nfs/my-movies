@@ -9,9 +9,7 @@ import {
 import { Text, View } from 'react-native';
 import { Entypo, Octicons, FontAwesome } from '@expo/vector-icons';
 
-
-export default function TabRoutesLayout() {
-
+export default () => {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_600SemiBold,
@@ -43,7 +41,7 @@ export default function TabRoutesLayout() {
       },
     }}>
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ focused }) => (
@@ -105,10 +103,6 @@ export default function TabRoutesLayout() {
           ),
         }}
       />
-
-
     </Tabs>
-
-
   );
-}
+};

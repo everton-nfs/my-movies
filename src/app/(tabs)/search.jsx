@@ -172,14 +172,11 @@ export default function Search() {
   const [selectedGender, setSelectedGender] = useState(1);
 
   return (
-    //<ImageBackground
     <SafeAreaView
       className="bg-blue-100 flex-1"
       style={{ width: "100%", height: Dimensions.get("screen").height }}
-    //source={require("../../assets/home-model.png")}
-    //resizeMode="cover"
     >
-      {/* <UserProfile /> */}
+      <UserProfile />
       <SearchBar />
       <ScrollView
         className="mb-[20%]"

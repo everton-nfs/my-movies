@@ -92,7 +92,7 @@ const moviesCategories = [
   }
 ];
 
-export default function Home() {
+export default function HomePage() {
   const [selectedGender, setSelectedGender] = useState(1);
 
   return (
