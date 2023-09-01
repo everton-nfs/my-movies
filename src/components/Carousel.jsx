@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, FlatList, ImageBackground, Dimensions, Text } from 'react-native';
 import Animated, { Layout, FadeInLeft, FadeOutRight } from 'react-native-reanimated';
 
-const Carousel = (props) => {
+const Carousel = ({movies}) => {
   const [activeBanner, setActiveBanner] = useState(0);
   const FlatlistRef = useRef(null);
 
@@ -23,7 +23,7 @@ const Carousel = (props) => {
 
   useEffect(() => {
     const timeId = setTimeout(() => {
-      const nextBannerIndex = (activeBanner + 1) % props.images.length;
+      const nextBannerIndex = (activeBanner + 1) % movies.length;
       FlatlistRef.current?.scrollToIndex({
         index: nextBannerIndex,
         animated: true,
@@ -33,11 +33,16 @@ const Carousel = (props) => {
     return () => clearTimeout(timeId);
   }, [activeBanner]);
 
+  const extractYearFromDate = (date) => {
+    const year = date.split("-")[0];
+    return parseInt(year);
+  }
+  
   return (
     <View style={{ alignItems: 'center', height: 190, display: 'flex' }}>
       <FlatList
         ref={FlatlistRef}
-        data={props.images}
+        data={movies}
         renderItem={({ item }) => (
 
           <View
@@ -48,7 +53,7 @@ const Carousel = (props) => {
           >
             <ImageBackground
               source={{
-                uri: item.image,
+                uri: `https://www.themoviedb.org/t/p/original/${item.backdrop_path}`,
               }}
               style={{
                 width: Dimensions.get("window").width - 50,
@@ -71,7 +76,7 @@ const Carousel = (props) => {
                   className="text-white"
                   style={{ fontFamily: "Poppins_600SemiBold" }}
                 >
-                  {item.launchDate}
+                  {extractYearFromDate(item.release_date)}
                 </Text>
               </View>
             </ImageBackground>
@@ -84,7 +89,7 @@ const Carousel = (props) => {
         showsHorizontalScrollIndicator={false}
       />
       <FlatList
-        data={props.images}
+        data={movies}
         renderItem={({ index }) => (
           <Animated.View
             layout={Layout}

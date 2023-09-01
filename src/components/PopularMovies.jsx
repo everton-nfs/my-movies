@@ -1,14 +1,20 @@
+import React from 'react';
 import { Text, View, ImageBackground, ScrollView } from 'react-native';
 import { Octicons } from '@expo/vector-icons';
 import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_500Medium, Poppins_700Bold } from '@expo-google-fonts/poppins';
+import Genre from './Genre';
 
-export default function PopularMovies({ movies }) {
+export default function PopularMovies({ movies, selectedGender }) {
 
   const [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_600SemiBold, Poppins_500Medium, Poppins_700Bold });
 
   if (!fontsLoaded) {
     return null;
   }
+
+  const filteredMovies = selectedGender
+    ? movies.filter(item => item.genre_ids[0] === selectedGender)
+    : movies;
 
   return (
     <View className="mt-[29px]">
@@ -26,7 +32,7 @@ export default function PopularMovies({ movies }) {
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={{ paddingHorizontal: 25 }}
       >
-        {movies.map((item, index) => (
+        {filteredMovies.map((item, index) => (
           <View
             key={index}
             style={{
@@ -36,7 +42,7 @@ export default function PopularMovies({ movies }) {
               marginHorizontal: 6,
               borderRadius: 10,
               marginLeft: index === 0 ? 0 : 6,
-              marginRight: index === movies.length - 1 ? 0 : 6,
+              marginRight: index === filteredMovies.length - 1 ? 0 : 6,
               overflow: "hidden",
               backgroundColor: "#252b56"
             }}
@@ -46,14 +52,20 @@ export default function PopularMovies({ movies }) {
                 width: "100%",
                 height: "100%",
                 flex: 1,
+                marginTop: -20
               }}
               source={{
-                uri: item.image,
+                uri: `https://www.themoviedb.org/t/p/original/${item.poster_path}`,
               }}
             >
-              <View className="flex self-end flex-row items-center justify-center m-2 mt-[8px] w-[60px] h-[25px] rounded-lg bg-black-50">
+              <View className="flex self-end flex-row items-center justify-center m-2 mt-[28px] w-[60px] h-[25px] rounded-lg bg-black-50">
                 <Octicons name="star-fill" size={15} color="#ebbf2a" />
-                <Text className="pl-[5px] pt-[2px] text-white" style={{ fontFamily: "Poppins_500Medium" }}>{item.avaliation}</Text>
+                <Text
+                  className="pl-[5px] pt-[2px] text-white"
+                  style={{ fontFamily: "Poppins_500Medium" }}
+                >
+                  {item.vote_average.toFixed(1)}
+                </Text>
               </View>
             </ImageBackground>
             <View className="px-[10px] pb-3">
@@ -65,14 +77,7 @@ export default function PopularMovies({ movies }) {
               >
                 {item.title}
               </Text>
-              <Text
-                className="text-blue-50 text-xs"
-                style={{ fontFamily: "Poppins_500Medium" }}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-              >
-                {item.category}
-              </Text>
+              <Genre genreId={item.genre_ids[0]} />
             </View>
           </View>
         ))}

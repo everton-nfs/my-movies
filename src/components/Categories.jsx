@@ -51,7 +51,7 @@ export default function Categories({ selectedGender, setSelectedGender, moviesCa
               style={{ fontFamily: "Poppins_500Medium" }}
               numberOfLines={1}
               ellipsizeMode="tail"
-            >{item.title}</Text>
+            >{item.name}</Text>
           </TouchableHighlight>
         ))}
       </ScrollView>

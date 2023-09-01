@@ -5,97 +5,28 @@ import Carousel from '../../components/Carousel';
 import Categories from '../../components/Categories';
 import PopularMovies from '../../components/PopularMovies';
 import Header from '../../components/Header';
-
-
-const featuredMovies = [
-  {
-    id: 1,
-    image:
-      "https://www.themoviedb.org/t/p/original/9n2tJBplPbgR2ca05hS5CKXwP2c.jpg",
-    title: "Super Mario Bros. O Filme",
-    launchDate: "2023"
-  },
-  {
-    id: 2,
-    image:
-      "https://www.themoviedb.org/t/p/original/4XM8DUTQb3lhLemJC51Jx4a2EuA.jpg",
-    title: "Velozes e Furiosos 10",
-    launchDate: "2023"
-  },
-  {
-    id: 3,
-    image:
-      "https://www.themoviedb.org/t/p/original/kVd3a9YeLGkoeR50jGEXM6EqseS.jpg",
-    title: "Homem-Aranha: Através do Aranhaverso",
-    launchDate: "2023"
-  },
-];
-
-const movies = [
-  {
-    id: 1,
-    image:
-      "https://www.themoviedb.org/t/p/original/6oH378KUfCEitzJkm07r97L0RsZ.jpg",
-    title: "Elementos",
-    category: "Animação",
-    avaliation: 4.6
-  },
-  {
-    id: 2,
-    image:
-      "https://www.themoviedb.org/t/p/original/gPbM0MK8CP8A174rmUwGsADNYKD.jpg",
-    title: "Transformers: O Despertar das Feras",
-    category: "Ação",
-    avaliation: 4.3
-  },
-  {
-    id: 3,
-    image:
-      "https://www.themoviedb.org/t/p/original/vB8o2p4ETnrfiWEgVxHmHWP9yRl.jpg",
-    title: "Agente Stone",
-    category: "Mistério",
-    avaliation: 4.8
-  },
-  {
-    id: 4,
-    image:
-      "https://www.themoviedb.org/t/p/original/rktDFPbfHfUbArZ6OOOKsXcv0Bm.jpg",
-    title: "The Flash",
-    category: "Ação",
-    avaliation: 4.1
-  },
-  {
-    id: 5,
-    image:
-      "https://www.themoviedb.org/t/p/original/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg",
-    title: "Barbie",
-    category: "Comédia",
-    avaliation: 4.8
-  },
-];
-
-const moviesCategories = [
-  {
-    id: 1,
-    title: "Todos"
-  },
-  {
-    id: 2,
-    title: "Comédia"
-  },
-  {
-    id: 3,
-    title: "Animação"
-  },
-  {
-    id: 4,
-    title: "Documentário"
-  }
-];
+import { results as movies } from '../../utils/allMovies.json';
+import { genres } from '../../utils/allGenres.json';
 
 export default function HomePage() {
-  const [selectedGender, setSelectedGender] = useState(1);
 
+  const [selectedGender, setSelectedGender] = useState(0);
+
+  const numberOfMoviesForCarousel = 3;
+  const numberOfPopularMovies = 20;
+  const addItemAllInMovieGenres = { "id": 0, "name": "Todos" };
+  const allMovieGenres = [addItemAllInMovieGenres, ...genres];
+
+  const getMoviesByQuantity = (data, count, random) => {
+    if (count >= data.length || random === false) {
+      return data.slice(0, count);
+    }
+    const shuffledArray = [...data].sort(() => Math.random() - 0.5);
+    return shuffledArray.slice(0, count);
+  };
+  
+  //console.log(JSON.stringify(allMovieGenres, null, '\t'));
+  
   return (
     //<ImageBackground
     <SafeAreaView
@@ -109,18 +40,23 @@ export default function HomePage() {
         email="evertonnfs2@gmail.com"
         user
       />
-      <SearchBar button placeholder="Pesquise pelo título..."/>
+      <SearchBar button placeholder="Pesquise pelo título..." />
       <ScrollView
         className="mb-[20%]"
         contentContainerStyle={{ flexGrow: 1 }}
       >
-        <Carousel images={featuredMovies} />
+        <Carousel
+          movies={getMoviesByQuantity(movies, numberOfMoviesForCarousel, true)}
+        />
         <Categories
           selectedGender={selectedGender}
           setSelectedGender={setSelectedGender}
-          moviesCategories={moviesCategories}
+          moviesCategories={allMovieGenres}
         />
-        <PopularMovies movies={movies} />
+        <PopularMovies
+          selectedGender={selectedGender}
+          movies={getMoviesByQuantity(movies, numberOfPopularMovies, false)}
+        />
       </ScrollView>
     </SafeAreaView>
   );
