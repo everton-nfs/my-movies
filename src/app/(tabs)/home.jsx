@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { ImageBackground, SafeAreaView, Dimensions, ScrollView } from 'react-native';
-import UserProfile from '../../components/UserProfile';
 import SearchBar from '../../components/SearchBar';
 import Carousel from '../../components/Carousel';
 import Categories from '../../components/Categories';
 import PopularMovies from '../../components/PopularMovies';
+import Header from '../../components/Header';
+
 
 const featuredMovies = [
   {
@@ -103,8 +104,12 @@ export default function HomePage() {
     //source={require("../../assets/home-model.png")}
     //resizeMode="cover"
     >
-      <UserProfile />
-      <SearchBar />
+      <Header
+        title="Olá Everton!"
+        email="evertonnfs2@gmail.com"
+        user
+      />
+      <SearchBar button placeholder="Pesquise pelo título..."/>
       <ScrollView
         className="mb-[20%]"
         contentContainerStyle={{ flexGrow: 1 }}
