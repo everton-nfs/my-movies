@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ImageBackground, SafeAreaView, Dimensions, ScrollView } from 'react-native';
+import { ImageBackground, SafeAreaView, Dimensions, ScrollView, Text } from 'react-native';
 import SearchBar from '../../components/SearchBar';
 import Carousel from '../../components/Carousel';
 import Categories from '../../components/Categories';
@@ -7,6 +7,7 @@ import PopularMovies from '../../components/PopularMovies';
 import Header from '../../components/Header';
 import { results as movies } from '../../utils/allMovies.json';
 import { genres } from '../../utils/allGenres.json';
+import { Link } from "expo-router";
 
 export default function HomePage() {
 
@@ -40,6 +41,9 @@ export default function HomePage() {
         email="evertonnfs2@gmail.com"
         user
       />
+
+      <Link className="m-10" href="/movie/615656"><Text>passe id</Text></Link>
+
       <SearchBar button placeholder="Pesquise pelo título..." />
       <ScrollView
         className="mb-[20%]"

@@ -7,6 +7,9 @@
     "plugins": [
       "expo-router"
     ],
+    "experiments":{
+      "typedRoutes": true
+    },
     "name": "my-movies",
     "slug": "my-movies"
   }
