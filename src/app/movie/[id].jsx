@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { SafeAreaView, Dimensions, View, Text, ImageBackground } from 'react-native';
 import { useLocalSearchParams, Stack } from 'expo-router';
 import { results as movies } from '../../utils/allMovies.json';
-import MoviePoster from '../../components/MoviePoster';
+import Movie from '../../components/Movie';
 import MovieInfo from '../../components/MovieInfo';
 
-export default function Movie() {
+export default function MovieId() {
   const { id } = useLocalSearchParams();
   const [movie, setMovie] = useState(null);
 
@@ -27,25 +27,26 @@ export default function Movie() {
       >
         {
           movie ? (
-            <MoviePoster
-              title={movie.title}
-              poster={movie.poster_path}
-            >
-              <MovieInfo
-                releaseDate={movie.release_date}
-                genreId={movie.genre_ids[0]}
-                voteAverage={movie.vote_average.toFixed(1)}
-              />
-            </MoviePoster>
+            <>
+              <Movie
+                title={movie.title}
+                poster={movie.poster_path}
+                overview={movie.overview}
+              >
+                <MovieInfo
+                  releaseDate={movie.release_date}
+                  genreId={movie.genre_ids[0]}
+                  voteAverage={movie.vote_average.toFixed(1)}
+                />
+              </Movie>
+            </>
           ) : (
             <View className="flex justify-center items-center">
               <Text className="text-white">Filme não encontrado</Text>
             </View>
           )
         }
-        {/* <Text className="text-white">Descrição: {movie.overview}</Text> */}
       </ImageBackground>
     </>
-
   );
 }

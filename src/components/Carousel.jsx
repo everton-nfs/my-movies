@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, FlatList, ImageBackground, Dimensions, Text } from 'react-native';
+import { View, FlatList, ImageBackground, Dimensions, Text, TouchableOpacity } from 'react-native';
 import Animated, { Layout, FadeInLeft, FadeOutRight } from 'react-native-reanimated';
 import { extractYearFromDate } from '../utils/extractYearFromDate';
+import { Link } from 'expo-router';
 
-const Carousel = ({movies}) => {
+const Carousel = ({ movies }) => {
   const [activeBanner, setActiveBanner] = useState(0);
   const FlatlistRef = useRef(null);
 
@@ -33,50 +34,56 @@ const Carousel = ({movies}) => {
     }, 3000);
     return () => clearTimeout(timeId);
   }, [activeBanner]);
-  
+
   return (
     <View style={{ alignItems: 'center', height: 190, display: 'flex' }}>
       <FlatList
         ref={FlatlistRef}
         data={movies}
         renderItem={({ item }) => (
-
-          <View
-            style={{
-              justifyContent: "center",
-              paddingHorizontal: 25,
-            }}
+          <Link
+            href={`/movie/${item.id}`}
+            asChild
           >
-            <ImageBackground
-              source={{
-                uri: `https://www.themoviedb.org/t/p/original/${item.backdrop_path}`,
-              }}
+            <TouchableOpacity
               style={{
-                width: Dimensions.get("window").width - 50,
-                height: "100%",
-                alignSelf: "center",
-                borderRadius: 18,
-                overflow: "hidden",
-                position: "relative",
+                justifyContent: "center",
+                paddingHorizontal: 25,
               }}
-              resizeMode="cover"
             >
-              <View className="flex-1 justify-end h-full px-4 pb-3 bg-black-75 w-full">
-                <Text
-                  className="text-lg leading-[22px] text-white"
-                  style={{ fontFamily: "Poppins_600SemiBold" }}
-                >
-                  {item.title}
-                </Text>
-                <Text
-                  className="text-white"
-                  style={{ fontFamily: "Poppins_600SemiBold" }}
-                >
-                  {extractYearFromDate(item.release_date)}
-                </Text>
-              </View>
-            </ImageBackground>
-          </View>
+              <ImageBackground
+                source={{
+                  uri: `https://www.themoviedb.org/t/p/original/${item.backdrop_path}`,
+                }}
+                style={{
+                  width: Dimensions.get("window").width - 50,
+                  height: "100%",
+                  alignSelf: "center",
+                  borderRadius: 18,
+                  overflow: "hidden",
+                  position: "relative",
+                }}
+                resizeMode="cover"
+              >
+                <View className="flex-1 justify-end h-full px-4 pb-3 bg-black-75 w-full">
+                  <Text
+                    className="text-lg leading-[22px] text-white"
+                    style={{ fontFamily: "Poppins_600SemiBold" }}
+                  >
+                    {item.title}
+                  </Text>
+                  <Text
+                    className="text-white"
+                    style={{ fontFamily: "Poppins_600SemiBold" }}
+                  >
+                    {extractYearFromDate(item.release_date)}
+                  </Text>
+                </View>
+              </ImageBackground>
+
+
+            </TouchableOpacity>
+          </Link>
         )}
         pagingEnabled
         viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
