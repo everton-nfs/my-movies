@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, FlatList, ImageBackground, Dimensions, Text } from 'react-native';
 import Animated, { Layout, FadeInLeft, FadeOutRight } from 'react-native-reanimated';
+import { extractYearFromDate } from '../utils/extractYearFromDate';
 
 const Carousel = ({movies}) => {
   const [activeBanner, setActiveBanner] = useState(0);
@@ -32,11 +33,6 @@ const Carousel = ({movies}) => {
     }, 3000);
     return () => clearTimeout(timeId);
   }, [activeBanner]);
-
-  const extractYearFromDate = (date) => {
-    const year = date.split("-")[0];
-    return parseInt(year);
-  }
   
   return (
     <View style={{ alignItems: 'center', height: 190, display: 'flex' }}>

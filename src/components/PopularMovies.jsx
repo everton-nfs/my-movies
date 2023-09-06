@@ -82,7 +82,14 @@ export default function PopularMovies({ movies, selectedGender }) {
                 >
                   {item.title}
                 </Text>
-                <Genre genreId={item.genre_ids[0]} />
+                <Text
+                  className="text-blue-50 text-xs"
+                  style={{ fontFamily: "Poppins_500Medium" }}
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                >
+                  <Genre genreId={item.genre_ids[0]} />
+                </Text>
               </View>
             </TouchableOpacity>
           </Link>

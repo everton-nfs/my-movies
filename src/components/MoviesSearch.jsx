@@ -58,8 +58,8 @@ export default function MoviesSearch({ movies }) {
                 >
                   <View className="flex self-end flex-row items-center justify-center m-2 mt-[28px] w-[60px] h-[25px] rounded-lg bg-black-50">
                     <Octicons name="star-fill" size={15} color="#ebbf2a" />
-                    <Text 
-                      className="pl-[5px] pt-[2px] text-white" 
+                    <Text
+                      className="pl-[5px] pt-[2px] text-white"
                       style={{ fontFamily: "Poppins_500Medium" }}
                     >
                       {item.vote_average.toFixed(1)}
@@ -75,7 +75,14 @@ export default function MoviesSearch({ movies }) {
                   >
                     {item.title}
                   </Text>
-                  <Genre genreId={item.genre_ids[0]}/>
+                  <Text
+                    className="text-blue-50 text-xs"
+                    style={{ fontFamily: "Poppins_500Medium" }}
+                    numberOfLines={1}
+                    ellipsizeMode="tail"
+                  >
+                    <Genre genreId={item.genre_ids[0]} />
+                  </Text>
                 </View>
               </View>
             ))}

@@ -41,9 +41,6 @@ export default function HomePage() {
         email="evertonnfs2@gmail.com"
         user
       />
-
-      <Link className="m-10" href="/movie/615656"><Text>passe id</Text></Link>
-
       <SearchBar button placeholder="Pesquise pelo título..." />
       <ScrollView
         className="mb-[20%]"

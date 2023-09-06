@@ -22,16 +22,16 @@ export default function Header({ title, email, user, goBack }) {
       )}
       {goBack && (
         <Link href={goBack} asChild>
-          <TouchableOpacity className="w-[10%]">
+          <TouchableOpacity className="w-[15%]">
             <View className="rounded-full bg-blue-75 w-8 h-8 flex justify-center items-center">
               <Entypo name="chevron-left" size={24} color="#ffffff" />
             </View>
           </TouchableOpacity>
         </Link>
       )}
-      <View className="flex-col w-[90%] justify-center pr-8">
+      <View className="flex-col w-[85%] justify-center">
         <Text
-          className={`text-lg leading-[10px] pt-5 text-white ${user ? "" : "flex self-center"}`}
+          className={`text-lg leading-[10px] mr-11 pt-5 text-white ${user ? "" : "flex self-center"}`}
           style={{ fontFamily: "Poppins_600SemiBold" }}
           numberOfLines={1}
           ellipsizeMode="tail"
