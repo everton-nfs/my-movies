@@ -11,6 +11,10 @@
       "typedRoutes": true
     },
     "name": "my-movies",
-    "slug": "my-movies"
+    "slug": "my-movies",
+    "androidStatusBar": {
+      "backgroundColor": "#181c42",
+      "translucent": false
+    }
   }
 }
